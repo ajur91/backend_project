@@ -38,11 +38,11 @@
               <td>{{ $about->email }}</td>
               <td>{{ $about->phone }}</td>
               <td>
-                  <a href="{{ route("about.edit",$about->id)}}" class="btn btn-sm btn-primary">Edit</a>
-                  <form action="{{ route("about.destroy",$about->id) }}" method="post">
-                    {{ csrf_field() }}
-                    {{ method_field("DELETE") }}
-                    <button type="submit" class="btn btn-danger" onclick="return confirm('¿Desea eliminar este registro?')">Delete</button>
+                <form action="{{ route("about.destroy",$about->id) }}" method="post">
+                  {{ csrf_field() }}
+                  {{ method_field("DELETE") }}
+                  <a href="{{ route("about.edit",$about->id)}}" class="btn btn-primary">Edit</a>
+                  <button type="submit" class="btn btn-danger" onclick="return confirm('¿Desea eliminar este registro?')">Delete</button>
                   </form>
               </td>
             </tr>

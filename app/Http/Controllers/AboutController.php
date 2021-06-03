@@ -15,6 +15,7 @@ class AboutController extends Controller
     public function index()
     {
         $repo["abouts"] = About::all();
+        $repo["title"] = "test";
         return view("about.index",$repo);
     }
 
@@ -70,7 +71,7 @@ class AboutController extends Controller
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
-     */
+    */
     public function edit($id)
     {
         $data = About::findOrFail($id);
@@ -101,5 +102,16 @@ class AboutController extends Controller
     {
         About::destroy($id);
         return redirect()->route("about.index");
+    }
+
+    public function saveApi(Request $request)
+    {
+        $data = $request->all();
+        try {
+            About::insert($data);
+        } catch (\Throwable $th) {
+            return response()->json(["message"=> "Se genero un error {$th->getMessage()}"],404);    
+        }
+        return response()->json(["message" => "Se creo el registro con exito"],201);
     }
 }
